@@ -5,62 +5,62 @@ using UnityEngine.UI;
 
 public class Scriptbuenisimo : MonoBehaviour
 {
-    public int cant = 0;
+    //Invoke Reapiting Variables
+    public bool autoGenerate = true;
+    public float freq = 1;
+
+    //Variable que contiene la cantidad de Objetos que cayeron
+    public int ObjetosCayeron;
+
+    //variable qu va contando las veces que cayeron
     public int i = 0;
 
-    public bool autoGenerate;
-    public float freq;
-
+    //Lista de los Prefabs
     public GameObject[] Prefabs;
 
+    //Numero rando
     public int Random_Number;
 
     public InputField input;
-    // Start is called before the first frame update
+
     void Start()
     {
-        cant = Random.Range(1, 11);
+        Random_Number = Random.Range(0, Prefabs.Length);
+        ObjetosCayeron = Random.Range(1, 11);
+
         if (autoGenerate)
         {
             InvokeRepeating(nameof(Clone), 0, freq);
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        cant++;
-    }
+
     public void Clone()
     {
-        if (i > cant)
+        if (i < ObjetosCayeron)
         {
-            Random_Number = Random.Range(0, Prefabs.Length);
-
-            Instantiate(Prefabs[Random_Number], new Vector3(Random.Range(-140, 450), 260, 400), Prefabs[Random_Number].transform.rotation);
+            Instantiate(Prefabs[Random_Number], new Vector3(Random.Range(-137, 400), 260, 700), Prefabs[Random_Number].transform.rotation);
             i++;
         }
     }
 
     void ButtonRespopnderClick() 
     {
-        convert input 
-        if (input.text == cant)
-        {
-            Debug.Log("Ganaste");
-        }
-        else if (input == );
-        {
-            Debug.Log("debe ingresar un resultado");
-        }
-        else
-        {
-            Debug.Log("perdiste");
-        }
-           
+        //if ()
+        //{
+        //Debug.Log("Ganaste");
+        //}
+        //else if (input == )
+        //{
+        //Debug.Log("debe ingresar un resultado");
+        //}
+        //else
+        //{
+        //Debug.Log("perdiste");
+        //}
     }
 }
