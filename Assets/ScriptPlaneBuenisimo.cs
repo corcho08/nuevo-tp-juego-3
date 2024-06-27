@@ -16,8 +16,8 @@ public class ScriptPlaneBuenisimo : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        Destroy(collision.gameObject);
+        Destroy(other.gameObject);
     }
 }

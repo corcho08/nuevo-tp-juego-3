@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Scriptbuenisimo : MonoBehaviour
 {
@@ -21,7 +22,19 @@ public class Scriptbuenisimo : MonoBehaviour
     //Numero rando
     public int Random_Number;
 
-    public InputField input;
+
+    //Vincula el inputfield con lo que escribas en el texto
+    public InputField InputNumber;
+
+    public Text textoNotificaciones;
+
+    public GameObject panelNotificaciones;
+
+    public GameObject panelError;
+
+    public GameObject panelRespuesta;
+
+    public Text botonJugardenuevo;
 
     void Start()
     {
@@ -32,6 +45,8 @@ public class Scriptbuenisimo : MonoBehaviour
         {
             InvokeRepeating(nameof(Clone), 0, freq);
         }
+        panelNotificaciones.SetActive(false);
+        panelError.SetActive(false);
     }
 
     void Update()
@@ -48,19 +63,50 @@ public class Scriptbuenisimo : MonoBehaviour
         }
     }
 
-    void ButtonRespopnderClick() 
+    public void ButtonRespopnderClick() 
     {
-        //if ()
-        //{
-        //Debug.Log("Ganaste");
-        //}
-        //else if (input == )
-        //{
-        //Debug.Log("debe ingresar un resultado");
-        //}
-        //else
-        //{
-        //Debug.Log("perdiste");
-        //}
+        if (InputNumber.text == "")
+        {
+            panelError.SetActive(true);
+            panelRespuesta.SetActive(false);
+        }
+        else if (InputNumber.text == ObjetosCayeron.ToString()) 
+        {
+            panelNotificaciones.SetActive(true);
+            panelRespuesta.SetActive(false);
+            textoNotificaciones.text = "El resultado es correcto";
+            botonJugardenuevo.text = "REINICIAR DESAFIO";
+        }
+        else         
+        {
+            panelNotificaciones.SetActive(true);
+            panelRespuesta.SetActive(false);
+            textoNotificaciones.text = "El resultado es incorrecto";
+            botonJugardenuevo.text = "VOLVER A INTENTARLO";
+        }
+    }
+
+    public void botonError()
+    {
+        panelError.SetActive(false);
+        panelRespuesta.SetActive(true);
+    }
+
+    public void Jugardenuevo()
+    {
+        if (InputNumber.text == ObjetosCayeron.ToString())
+        {
+            SceneManager.LoadScene("FirstScene");
+        }
+        else
+        {
+            panelNotificaciones.SetActive(false);
+            panelRespuesta.SetActive(true);
+        }
+    }
+
+    public void Salir()
+    {
+        SceneManager.LoadScene("SeleccionarJuegos");
     }
 }
